@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: #fff;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 15px;
+            background: #3498db;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: background 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #2980b9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #3498db;
+            color: #fff;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        .action-link {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: color 0.3s;
+        }
+
+        .action-link:hover {
+            color: #1abc9c;
+        }
+
+        .delete-link {
+            color: #e74c3c;
+        }
+
+        .delete-link:hover {
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Records</h1>
+        <a href="{{ url_for('add_student') }}" class="add-btn">+ Add New Student</a>
+        <table>
+            <tr>
+                <th>ID</th><th>Name</th><th>Email</th><th>Age</th><th>Actions</th>
+            </tr>
+            {% for s in students %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.name }}</td>
+                <td>{{ s.email }}</td>
+                <td>{{ s.age }}</td>
+                <td>
+                    <a href="{{ url_for('edit_student', id=s.id) }}" class="action-link">Edit</a>
+                    <a href="{{ url_for('delete_student', id=s.id) }}" class="action-link delete-link">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
